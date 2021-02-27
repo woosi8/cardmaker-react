@@ -5,7 +5,7 @@ var firebaseConfig = {
 	databaseURL: process.env.REACT_APP_FIREBASE_DB_URL,
 	projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
 };
-// Initialize Firebase
-const fireBaseApp = firebase.initializeApp(firebaseConfig);
+
+// Initialize Firebase (먼저 firebase 공홈 Authentication/ sing-in method에서 해당 프로그램 enabled 해줘야 한다)
+const fireBaseApp = firebase.initializeApp(firebaseConfig); // auth_service에 return (동일한 인터페이스)
 export default fireBaseApp;
-// firebase.analytics();

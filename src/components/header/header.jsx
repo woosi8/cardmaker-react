@@ -2,7 +2,7 @@ import React from "react";
 import style from "./header.module.css";
 
 const Header = (
-	{ onLogout } //
+	{ onLogout } // props에 login이 되었다면 logout 콜백할수를 받아온다
 ) => (
 	<header className={style.header}>
 		{onLogout && (
