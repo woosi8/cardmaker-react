@@ -22,10 +22,11 @@ const Login = ({ authService }) => {
 			.then((data) => goToMaker(data.user.uid));
 	};
 
+	// 접속할때마다 로그인 되지 않고 로그인을 기억하고 있어 접속시 로그인 화면으로 바로 넘어가게 해주기
 	useEffect(() => {
-		// onAuthChange : authService에 변화가 있따면 (내장 함수)
+		// onAuthChange : authService에 변화가 있다면 (내장 함수)
 		authService.onAuthChange((user) => {
-			// user가 있다면 (로그인) goToMAker로 uid 전달
+			// user(로그인)가 있다면  goToMAker로 uid 전달
 			user && goToMaker(user.uid);
 		});
 	});

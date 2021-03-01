@@ -15,7 +15,9 @@ class AuthService {
 	}
 
 	// 사용자가 바꼈을때 원하는 기능을 수행하는 콜백함수
+	//(onUserChanged)는 login.jsx에서 함수자체로 전달받는다
 	onAuthChange(onUserChanged) {
+		//(user) 사용자가 바뀔때마다 전달받는 사용자 정보
 		firebase.auth().onAuthStateChanged((user) => {
 			//사용자가 바뀔떄마다 전달받은 사용자 정보를 함수에 전달 호출
 			onUserChanged(user);
