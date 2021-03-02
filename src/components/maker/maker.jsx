@@ -11,12 +11,12 @@ const Maker = ({ authService }) => {
 		{
 			id: "1",
 			company: "Samsung",
-			theme: "light",
+			theme: "dark",
 			title: "Software Engineer",
 			email: "tmfvmehek@gmail.com",
 			message: "go for it",
-			firstName: "ellie1",
-			fileURL: "",
+			name: "ellie1",
+			fileURL: null, // 사진 초기값을 주기위해
 		},
 		{
 			id: "2",
@@ -25,18 +25,18 @@ const Maker = ({ authService }) => {
 			title: "Software Engineer",
 			email: "tmfvmehek@gmail.com",
 			message: "go for it",
-			firstName: "ellie2",
-			fileURL: "",
+			name: "ellie2",
+			fileURL: null,
 		},
 		{
 			id: "3",
 			company: "Samsung",
-			theme: "light",
+			theme: "colorful",
 			title: "Software Engineer",
 			email: "tmfvmehek@gmail.com",
 			message: "go for it",
-			firstName: "ellie3",
-			fileURL: "",
+			name: "ellie3",
+			fileURL: null,
 		},
 	]);
 	const history = useHistory();

@@ -1,37 +1,67 @@
-@value makerGreen, makerLightPink, makerWhite from '../../common/colors.css';
+@value makerWheat, makerColorful, makerBlack, makerWhite, makerShadow from '../../common/colors.css';
+@value from '../../common/colors.css';
 
-.login {
-	width: 30em;
-	text-align: center;
+.card {
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	align-items: center;
+	background-color: yellow;
+	width: 100%;
+	margin: 0.5em;
+	border-radius: 0.5em;
+	padding: 0.2em 0;
+	box-shadow: 6px 6px 8px 0px makerShadow;
+	max-width: 30rem;
+}
+
+.card.dark {
+	background-color: makerBlack;
+	color: makerWhite;
+}
+
+.card.light {
 	background-color: makerWhite;
+	color: makerBlack;
 }
 
-.list {
+.card.colorful {
+	background: makerColorful;
+}
+
+.avatar {
+	width: 10em;
+	height: 10em;
+	padding: 1em;
+	margin-left: 0.5em;
+	margin-left: 1em;
+	border-radius: 50%;
+}
+
+.info {
 	width: 100%;
-	display: flex;
-	flex-direction: column;
-	list-style: none;
-	padding: 0.5rem;
+}
+.name,
+.company,
+.title,
+.email,
+.message {
+	margin: 0;
+	font-size: 0.8em;
+	margin-bottom: 0.2em;
 }
 
-.item {
-	margin-bottom: 0.5em;
-}
-
-.button {
-	width: 100%;
-	height: 2.5em;
+.name {
 	font-size: 1.2rem;
-	border-radius: 1.2rem;
-	background-color: transparent;
-	cursor: pointer;
-	border: 0.2rem solid makerGreen;
-	outline: 0;
+}
+.company {
+	margin-bottom: 1em;
 }
 
-.button:hover {
-	background-color: makerLightPink;
+.company::after {
+	content: "";
+	display: block;
+	clear: both;
+	width: 90%;
+	height: 2px;
+	background-color: makerWheat;
+	transform: translateY(0.5em);
 }
