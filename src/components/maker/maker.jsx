@@ -47,7 +47,7 @@ const Maker = ({ authService }) => {
 	useEffect(() => {
 		authService.onAuthChange((user) => {
 			if (!user) {
-				history.push("/");
+				history.push("/cardmaker-react");
 			}
 		});
 	});

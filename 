@@ -1,0 +1,35 @@
+[33mcommit 311ab16c657164083a58503e83498e0b6043557d[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: DESKTOP-QNTD4OJ\Asher <tmfvmehek@gmail.com>
+Date:   Wed Mar 3 10:08:13 2021 +0900
+
+    modified main address
+
+[33mcommit 7e47b6de77a25883216e9bce49fb746a8d5d14d9[m
+Author: DESKTOP-QNTD4OJ\Asher <tmfvmehek@gmail.com>
+Date:   Tue Mar 2 22:45:26 2021 +0900
+
+    add card and edit from component
+
+[33mcommit 9654ba6158832d39714a470f60ce9a8290a3cb6f[m
+Author: DESKTOP-QNTD4OJ\Asher <tmfvmehek@gmail.com>
+Date:   Tue Mar 2 13:03:42 2021 +0900
+
+    make card editor,preview
+
+[33mcommit d44956771ad53806803d59618e968108e0fcd68a[m
+Author: DESKTOP-QNTD4OJ\Asher <tmfvmehek@gmail.com>
+Date:   Mon Mar 1 21:17:23 2021 +0900
+
+    add editor and preview layout
+
+[33mcommit 25d661a6711d3434e6d82cc951ccecd5ea8609d8[m
+Author: DESKTOP-QNTD4OJ\Asher <tmfvmehek@gmail.com>
+Date:   Sat Feb 27 23:13:37 2021 +0900
+
+    add login and logout functionality
+
+[33mcommit 17ab09d1ff5d8479e15a37ce4d367b94d00d50a0[m
+Author: DESKTOP-QNTD4OJ\Asher <tmfvmehek@gmail.com>
+Date:   Fri Feb 26 22:56:40 2021 +0900
+
+    add login component
