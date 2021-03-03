@@ -9,7 +9,7 @@ function App({ authService }) {
 		<div className={styles.app}>
 			<BrowserRouter>
 				<Switch>
-					<Route exact path="/">
+					<Route exact path="/cardmaker-react">
 						<Login authService={authService} />
 					</Route>
 					<Route exact path="/maker">
