@@ -3,7 +3,7 @@ import styles from "./card_edit_form.module.css";
 import Button from "../button/button";
 import ImageFileInput from "../image_file_input/image_file_input";
 const CardEditForm = ({ card }) => {
-	const { name, company, title, email, message, theme, fileURL } = card;
+	const { name, company, title, email, message, theme, fileURL } = card; //props으로 maker에 있는 cards 오브젝트를 가져온다
 	const onSubmit = () => {};
 	return (
 		<form className={styles.form}>
