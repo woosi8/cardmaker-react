@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/cardmaker-react/static/css/main.6ede4a46.chunk.css",
-    "main.js": "/cardmaker-react/static/js/main.759e63b4.chunk.js",
-    "main.js.map": "/cardmaker-react/static/js/main.759e63b4.chunk.js.map",
+    "main.css": "/cardmaker-react/static/css/main.719c6290.chunk.css",
+    "main.js": "/cardmaker-react/static/js/main.f2377f16.chunk.js",
+    "main.js.map": "/cardmaker-react/static/js/main.f2377f16.chunk.js.map",
     "runtime-main.js": "/cardmaker-react/static/js/runtime-main.a935fd50.js",
     "runtime-main.js.map": "/cardmaker-react/static/js/runtime-main.a935fd50.js.map",
-    "static/js/2.cf897c87.chunk.js": "/cardmaker-react/static/js/2.cf897c87.chunk.js",
-    "static/js/2.cf897c87.chunk.js.map": "/cardmaker-react/static/js/2.cf897c87.chunk.js.map",
+    "static/js/2.538d740e.chunk.js": "/cardmaker-react/static/js/2.538d740e.chunk.js",
+    "static/js/2.538d740e.chunk.js.map": "/cardmaker-react/static/js/2.538d740e.chunk.js.map",
     "index.html": "/cardmaker-react/index.html",
-    "static/css/main.6ede4a46.chunk.css.map": "/cardmaker-react/static/css/main.6ede4a46.chunk.css.map",
-    "static/js/2.cf897c87.chunk.js.LICENSE.txt": "/cardmaker-react/static/js/2.cf897c87.chunk.js.LICENSE.txt"
+    "static/css/main.719c6290.chunk.css.map": "/cardmaker-react/static/css/main.719c6290.chunk.css.map",
+    "static/js/2.538d740e.chunk.js.LICENSE.txt": "/cardmaker-react/static/js/2.538d740e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a935fd50.js",
-    "static/js/2.cf897c87.chunk.js",
-    "static/css/main.6ede4a46.chunk.css",
-    "static/js/main.759e63b4.chunk.js"
+    "static/js/2.538d740e.chunk.js",
+    "static/css/main.719c6290.chunk.css",
+    "static/js/main.f2377f16.chunk.js"
   ]
 }
