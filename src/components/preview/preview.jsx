@@ -9,7 +9,7 @@ const Preview = ({ cards }) => (
 			{/* cards를 돌면서 각각의 카드를 해당하는 컴포넌트로 변환 */}
 			{/* {cards.map((card) => ( */}
 			{Object.keys(cards).map((key) => (
-				<Card key={key} card={cards[key]} />
+				<Card key={key} card={cards[key]} /> //value를 받아온다
 			))}
 		</ul>
 	</section>

@@ -3,7 +3,7 @@ import styles from "./card_edit_form.module.css";
 import Button from "../button/button";
 import ImageFileInput from "../image_file_input/image_file_input";
 const CardEditForm = ({ card, updateCard, deleteCard }) => {
-	const { name, company, title, email, message, theme, fileURL } = card; //props으로 maker에 있는 cards 오브젝트를 가져온다
+	const { name, company, title, email, message, theme, fileURL } = card; //props으로 maker에 있는 cards 오브젝트를 가져와서 맞는 키값에 할당
 	const onChange = (event) => {
 		if (event.currentTarget == null) {
 			return;
@@ -12,8 +12,10 @@ const CardEditForm = ({ card, updateCard, deleteCard }) => {
 		// 순서는: 1. 기존의 card값을 복사하고 + 업데이트 되는 내용을 추가 해서 새로운 오브젝트를 먼저 만들고 2. 그리고 updateCard에 인자로 전달해줘요
 		updateCard({
 			...card, //기존 카드의 키와 벨류는 그대로 쓰면서
-			[event.currentTarget.name]: event.currentTarget.value, // 키는 지금 발생하고 있는 이벤트의 타겟의 이름을 쓰고: 이벤트의 있는 벨류를 벨류로 쓴다
-		});
+			// 클릭한 input의 name이 card의 key가 되고, value가 우리의 value가 된다
+			[event.currentTarget.name]: event.currentTarget.value, // 키는 지금 발생하고 있는 이벤트의 타겟의 이름을 쓰고: value즉 입력되는 값을 쓴다
+			// Computed property names : updateCard[event.currentTarget.name] = event.currentTarget.value
+		}); // 여기가지는 updateCard만 되어있는상태고 화면에 보일려면 card state가 업데이트가 되야한다
 	};
 	const onSubmit = () => {
 		deleteCard(card);
