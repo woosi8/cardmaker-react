@@ -7,8 +7,9 @@ const Preview = ({ cards }) => (
 		<h1 className={styles.title}>Card Preview</h1>
 		<ul className={styles.cards}>
 			{/* cards를 돌면서 각각의 카드를 해당하는 컴포넌트로 변환 */}
-			{cards.map((card) => (
-				<Card card={card} />
+			{/* {cards.map((card) => ( */}
+			{Object.keys(cards).map((key) => (
+				<Card key={key} card={cards[key]} />
 			))}
 		</ul>
 	</section>

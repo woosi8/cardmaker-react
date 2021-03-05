@@ -26,7 +26,7 @@ const CardAddForm = ({ onAdd }) => {
 			fileURL: "",
 		};
 		formRef.current.reset(); //사용자가 입력해서 제출하고 나면 폼이 리셋이 나도록
-		onAdd(card);
+		onAdd(card); //최종적으로 card가 maker에 const addCard = (card)값으로 전달된다
 	};
 	return (
 		<form ref={formRef} className={styles.form}>

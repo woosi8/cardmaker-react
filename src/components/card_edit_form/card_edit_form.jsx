@@ -2,29 +2,67 @@ import React from "react";
 import styles from "./card_edit_form.module.css";
 import Button from "../button/button";
 import ImageFileInput from "../image_file_input/image_file_input";
-const CardEditForm = ({ card }) => {
+const CardEditForm = ({ card, updateCard, deleteCard }) => {
 	const { name, company, title, email, message, theme, fileURL } = card; //props으로 maker에 있는 cards 오브젝트를 가져온다
-	const onSubmit = () => {};
+	const onChange = (event) => {
+		if (event.currentTarget == null) {
+			return;
+		}
+		event.preventDefault();
+		// 순서는: 1. 기존의 card값을 복사하고 + 업데이트 되는 내용을 추가 해서 새로운 오브젝트를 먼저 만들고 2. 그리고 updateCard에 인자로 전달해줘요
+		updateCard({
+			...card, //기존 카드의 키와 벨류는 그대로 쓰면서
+			[event.currentTarget.name]: event.currentTarget.value, // 키는 지금 발생하고 있는 이벤트의 타겟의 이름을 쓰고: 이벤트의 있는 벨류를 벨류로 쓴다
+		});
+	};
+	const onSubmit = () => {
+		deleteCard(card);
+	};
 	return (
 		<form className={styles.form}>
-			<input className={styles.input} type="text" name="name" value={name} />
+			<input
+				className={styles.input}
+				type="text"
+				name="name"
+				value={name}
+				onChange={onChange}
+			/>
 			<input
 				className={styles.input}
 				type="text"
 				name="company"
 				value={company}
+				onChange={onChange}
 			/>
-			<select className={styles.select} name="theme" value={theme}>
+			<select
+				className={styles.select}
+				name="theme"
+				value={theme}
+				onChange={onChange}
+			>
 				<option value="light">Light</option>
 				<option value="dark">Dark</option>
 				<option value="colorful">Colorful</option>
 			</select>
-			<input className={styles.input} type="text" name="title" value={title} />
-			<input className={styles.input} type="text" name="email" value={email} />
+			<input
+				className={styles.input}
+				type="text"
+				name="title"
+				value={title}
+				onChange={onChange}
+			/>
+			<input
+				className={styles.input}
+				type="text"
+				name="email"
+				value={email}
+				onChange={onChange}
+			/>
 			<textarea
 				className={styles.textarea}
 				name="message"
 				value={message}
+				onChange={onChange}
 			></textarea>
 			{/* 클래스는 스타일 주려면 div안에 넣어줘야한다 */}
 			<div className={styles.fileInput}>
