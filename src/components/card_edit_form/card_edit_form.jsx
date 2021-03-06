@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./card_edit_form.module.css";
 import Button from "../button/button";
-import ImageFileInput from "../image_file_input/image_file_input";
-const CardEditForm = ({ card, updateCard, deleteCard }) => {
+
+const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
 	const { name, company, title, email, message, theme, fileURL } = card; //props으로 maker에 있는 cards 오브젝트를 가져와서 맞는 키값에 할당
 	const onChange = (event) => {
 		if (event.currentTarget == null) {
@@ -68,7 +68,7 @@ const CardEditForm = ({ card, updateCard, deleteCard }) => {
 			></textarea>
 			{/* 클래스는 스타일 주려면 div안에 넣어줘야한다 */}
 			<div className={styles.fileInput}>
-				<ImageFileInput />
+				<FileInput />
 			</div>
 			<Button name="Delete" onClick={onSubmit} />
 		</form>

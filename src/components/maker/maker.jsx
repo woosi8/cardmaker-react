@@ -6,7 +6,7 @@ import Editor from "../editor/editor";
 import Preview from "../preview/preview";
 import styles from "./maker.module.css";
 
-const Maker = ({ authService }) => {
+const Maker = ({ FileInput, authService }) => {
 	const [cards, setCards] = useState({
 		// key는 카드의 아이디이고 {오브젝트는} 벨류 : 오브젝트 형태로 관리해야 속도측면에서 좋다. 배열이 많아지면 업데이트시 맵핑할때 그만큼 속도가 저하된다.
 		// key는 card의 id로 한다 1: {id:"1"}
@@ -87,6 +87,7 @@ const Maker = ({ authService }) => {
 			<Header onLogout={onLogout} />
 			<div className={styles.container}>
 				<Editor
+					FileInput={FileInput}
 					cards={cards}
 					addCard={CreateOrupdateCard}
 					updateCard={CreateOrupdateCard}

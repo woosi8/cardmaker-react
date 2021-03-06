@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
 import styles from "./card_add_form.module.css";
 import Button from "../button/button";
-import ImageFileInput from "../image_file_input/image_file_input";
 // onAdd를 제공한것이 editor.jsx editor는 maker에서 전달받는다
-const CardAddForm = ({ onAdd }) => {
+const CardAddForm = ({ FileInput, onAdd }) => {
 	const formRef = useRef();
 	const nameRef = useRef();
 	const companyRef = useRef();
@@ -76,7 +75,7 @@ const CardAddForm = ({ onAdd }) => {
 			></textarea>
 			{/* 클래스는 스타일 주려면 div안에 넣어줘야한다 */}
 			<div className={styles.fileInput}>
-				<ImageFileInput />
+				<FileInput />
 			</div>
 			<Button name="Add" onClick={onSubmit} />
 		</form>

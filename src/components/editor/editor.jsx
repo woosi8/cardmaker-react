@@ -2,7 +2,7 @@ import CardAddForm from "../card_add_form/card_add_form";
 import CardEditForm from "../card_edit_form/card_edit_form";
 import styles from "./editor.module.css";
 
-const Editor = ({ cards, addCard, updateCard, deleteCard }) => (
+const Editor = ({ FileInput, cards, addCard, updateCard, deleteCard }) => (
 	<section className={styles.editor}>
 		<h1 className={styles.title}>Card Maker</h1>
 		{/* { {cards.map((card) => (  cards는 더이상 배열이 아닌 오브젝트이기 때문에} */}
@@ -12,12 +12,13 @@ const Editor = ({ cards, addCard, updateCard, deleteCard }) => (
 		) => (
 			<CardEditForm
 				key={key}
+				FileInput={FileInput}
 				card={cards[key]}
 				updateCard={updateCard}
 				deleteCard={deleteCard}
 			/>
 		))}
-		<CardAddForm onAdd={addCard} />
+		<CardAddForm FileInput={FileInput} onAdd={addCard} />
 	</section>
 );
 
