@@ -6,52 +6,41 @@ import Editor from "../editor/editor";
 import Preview from "../preview/preview";
 import styles from "./maker.module.css";
 
-const Maker = ({ FileInput, authService }) => {
+const Maker = ({ FileInput, authService, cardRepository }) => {
+	const history = useHistory();
+	const historyState = history?.location?.state; //login 에서 history에 저장한 state에 user id를 불러온다
+
 	const [cards, setCards] = useState({
 		// key는 카드의 아이디이고 {오브젝트는} 벨류 : 오브젝트 형태로 관리해야 속도측면에서 좋다. 배열이 많아지면 업데이트시 맵핑할때 그만큼 속도가 저하된다.
 		// key는 card의 id로 한다 1: {id:"1"}
-		1: {
-			id: "1",
-			name: "ellie1",
-			company: "Samsung",
-			theme: "dark",
-			title: "Software Engineer",
-			email: "tmfvmehek@gmail.com",
-			message: "go for it",
-			fileName: "ellie",
-			fileURL: null, // 사진 초기값을 주기위해
-		},
-		2: {
-			id: "2",
-			name: "ellie2",
-			company: "Samsung",
-			theme: "light",
-			title: "Software Engineer",
-			email: "tmfvmehek@gmail.com",
-			message: "go for it",
-			fileName: "ellie",
-			fileURL: null,
-		},
-		3: {
-			id: "3",
-			name: "ellie3",
-			company: "Samsung",
-			theme: "colorful",
-			title: "Software Engineer",
-			email: "tmfvmehek@gmail.com",
-			message: "go for it",
-			fileName: "ellie",
-			fileURL: null,
-		},
 	});
-	const history = useHistory();
+	// 리액트 훅으로 state를 다른 변수로 따로 관리할수 있다는 장점
+	const [userId, setUserId] = useState(historyState && historyState.id); // historyState는 login 컴포넌트에서 오면 값이 있고 다른 컴포넌트에서 오면 값이 없다
 	const onLogout = () => {
 		authService.logout();
 	};
 
+	// 이 useEffect는 사용자가
+	useEffect(() => {
+		if (!userId) {
+			return;
+		}
+		const stopSync = cardRepository.syncCards(userId, (cards) => {
+			//2번째 인자 cards는 prop으로 onUpdate를 호출한다 value = cards 우리 state에 넣어서  업데이트한다
+			setCards(cards); // cards(새로운 데이터)를 받아오면 우리의 state를 업데이트 한다
+		});
+		// 끄고 싶을때 (컴포넌트가 업마운트 되었을때 더이상 보이지 않을때)
+		return () => {
+			stopSync();
+		};
+	}, [userId]); // 이 useEffect는 maker 컴포넌트가 마운트가 되었을때 그리고 사용자의 id가 변경될때마다 쓴다
+
+	// 사용자가 변경될때 콜백 (로그인)
 	useEffect(() => {
 		authService.onAuthChange((user) => {
-			if (!user) {
+			if (user) {
+				setUserId(user.uid);
+			} else {
 				history.push("/cardmaker-react");
 			}
 		});
@@ -75,7 +64,9 @@ const Maker = ({ FileInput, authService }) => {
 			// [card.id]는 1,2,3 중에 하나이고, 만약 1이면 state가 1인 오브젝트가 선택되고 그 오브젝트를 최신화된 card로 변경해준다
 			return updated; // maker.js의 state(cards)를 업데이트 해줘야 입력한 값들이 화면에 나오게 된다 (그전에 입력값은 그저 card에 넣어놓은거 뿐)
 		});
-		console.log(card);
+
+		// 카드가 업데이트 되어서 우리 컴포넌트에 우리 카드를 업데이트 한다음에(위에서 처리) 다음 아래에서 데이터 베이스에 업데이트 해준다
+		cardRepository.saveCard(userId, card);
 	};
 	const deleteCard = (card) => {
 		setCards((cards) => {
@@ -83,6 +74,7 @@ const Maker = ({ FileInput, authService }) => {
 			delete updated[card.id];
 			return updated;
 		});
+		cardRepository.removeCard(userId, card);
 	};
 
 	return (

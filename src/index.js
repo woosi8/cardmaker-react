@@ -6,6 +6,7 @@ import AuthService from "./service/auth_service";
 import ImageUploader from "./service/image_uploader";
 import ImageFileInput from "./components/image_file_input/image_file_input";
 // import reportWebVitals from './reportWebVitals';
+import CardRepository from "./service/card_repository";
 
 const authService = new AuthService();
 // 최상위 전달자 index라서 여기서 이미지를 전달한다
@@ -21,9 +22,16 @@ const imageUploader = new ImageUploader();
 const FileInput = (props) => (
 	<ImageFileInput {...props} imageUploader={imageUploader} />
 );
+
+const cardRepository = new CardRepository();
+
 ReactDOM.render(
 	<React.StrictMode>
-		<App authService={authService} FileInput={FileInput} />
+		<App
+			authService={authService}
+			FileInput={FileInput}
+			cardRepository={cardRepository}
+		/>
 	</React.StrictMode>,
 	document.getElementById("root")
 );
