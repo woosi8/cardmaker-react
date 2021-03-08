@@ -11,9 +11,10 @@ const CardAddForm = ({ FileInput, onAdd }) => {
 	const emailRef = useRef();
 	const messageRef = useRef();
 
+	// 파일이 바뀌면(사용자가 업로드) 하면 state로 가지고 있는다 왜냐면 변경해놨다가 add버튼을 누를때만 업데이트 되기떄문
 	const [file, setFile] = useState({ fileName: null, fileURL: null });
 	const onFileChange = (file) => {
-		console.log(file);
+		// file을 받아와면 setFile로 업데이트 해준다
 		setFile({
 			fileName: file.name,
 			fileURL: file.url,
@@ -30,6 +31,7 @@ const CardAddForm = ({ FileInput, onAdd }) => {
 			title: titleRef.current.value || "",
 			email: emailRef.current.value || "",
 			message: messageRef.current.value || "",
+			// image upload
 			fileName: file.fileName || "",
 			fileURL: file.fileURL || "",
 		};

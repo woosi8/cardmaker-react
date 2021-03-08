@@ -12,32 +12,35 @@ const Maker = ({ FileInput, authService }) => {
 		// key는 card의 id로 한다 1: {id:"1"}
 		1: {
 			id: "1",
+			name: "ellie1",
 			company: "Samsung",
 			theme: "dark",
 			title: "Software Engineer",
 			email: "tmfvmehek@gmail.com",
 			message: "go for it",
-			name: "ellie1",
+			fileName: "ellie",
 			fileURL: null, // 사진 초기값을 주기위해
 		},
 		2: {
 			id: "2",
+			name: "ellie2",
 			company: "Samsung",
 			theme: "light",
 			title: "Software Engineer",
 			email: "tmfvmehek@gmail.com",
 			message: "go for it",
-			name: "ellie2",
+			fileName: "ellie",
 			fileURL: null,
 		},
 		3: {
 			id: "3",
+			name: "ellie3",
 			company: "Samsung",
 			theme: "colorful",
 			title: "Software Engineer",
 			email: "tmfvmehek@gmail.com",
 			message: "go for it",
-			name: "ellie3",
+			fileName: "ellie",
 			fileURL: null,
 		},
 	});

@@ -3,16 +3,8 @@ import styles from "./card_edit_form.module.css";
 import Button from "../button/button";
 
 const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
-	const {
-		name,
-		company,
-		title,
-		email,
-		message,
-		theme,
-		fileURL,
-		fileName,
-	} = card; //props으로 maker에 있는 cards 오브젝트를 가져와서 맞는 키값에 할당
+	const { name, company, title, email, message, theme, fileName } = card; //props으로 maker에 있는 cards 오브젝트를 가져와서 맞는 키값에 할당
+
 	const onFileChange = (file) => {
 		updateCard({
 			...card,
@@ -36,6 +28,7 @@ const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
 	const onSubmit = () => {
 		deleteCard(card);
 	};
+	console.log(fileName);
 	return (
 		<form className={styles.form}>
 			<input
@@ -84,7 +77,7 @@ const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
 			></textarea>
 			{/* 클래스는 스타일 주려면 div안에 넣어줘야한다 */}
 			<div className={styles.fileInput}>
-				<FileInput onFileChange={onFileChange} name={fileName} />
+				<FileInput name={fileName} onFileChange={onFileChange} />
 			</div>
 			<Button name="Delete" onClick={onSubmit} />
 		</form>
