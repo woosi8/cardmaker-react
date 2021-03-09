@@ -3,20 +3,11 @@ import styles from "./card.module.css";
 
 const Card = ({ card }) => {
 	const DEFAULT_IMAGE = process.env.PUBLIC_URL + "/images/default_logo.png";
-	const {
-		name,
-		company,
-		title,
-		email,
-		message,
-		theme,
-		fileName,
-		fileURL,
-	} = card;
+	const { name, company, title, email, message, theme, fileURL } = card;
 	const url = fileURL || DEFAULT_IMAGE; //fielURL이 있으면 그대로 fileURL을 쓰고 없다면 디폴트
 	return (
 		<li className={`${styles.card} ${getStyles(theme)}`}>
-			<img className={styles.avatar} src={url} alt="profile photo" />
+			<img className={styles.avatar} src={url} alt="profile" />
 			<div className={styles.info}>
 				<h1 className={styles.name}>{name}</h1>
 				<p className={styles.company}>{company}</p>
@@ -38,7 +29,6 @@ function getStyles(theme) {
 			return styles.colorful;
 		default:
 			throw new Error(`unknown theme: ${theme}`);
-			break;
 	}
 }
 

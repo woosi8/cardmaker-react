@@ -28,7 +28,6 @@ const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
 	const onSubmit = () => {
 		deleteCard(card);
 	};
-	console.log(fileName);
 	return (
 		<form className={styles.form}>
 			<input

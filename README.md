@@ -2,9 +2,24 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Firebase 실시간 Database Sync
 
-In the project directory, you can run:
+-login.jsx
+메이커 컴포넌트에서 사용자의 카드가 업데이트 될떄마다 cardRepository를 이용할건데 이때 사용자의 아이디를 이용해서 카드들이 사용자 id별로 저장되도록 만들어야한다
+사용자 id는 login할때 history에서 함께 전달하게 된다
+메이커에서 이 값을 state로 저장한다. userId
+
+- maker.jsx ( // 데이터 보존하기 위한 state)
+
+1. 컴포넌트가 마운트가 되면 cardRepository의 syncCards가 먼저 호출이 됩니다
+
+2. syncCards의 함수가 수행됩니다 (ref.on이 실행되겠죠?)
+   그리고 함수 수행이 완료되고 마지막으로는 arrow 함수가 리턴이 되어요 (아직 수행되지 않음)
+
+3. 리턴된 arrow 함수의 오브젝트가 stopSync에 할당이 되어지고
+
+4. 여기 useEffect에서 리턴되는 stopSync를 수행하게될 arrow 함수는 나중에 컴포넌트가 언마운트되면 수행이 될거예요 :) (그전까지는 stopSync()는 호출되지 않음, 그러므로 startSync에서 리턴되었던 함수도 수행이 되지 않음)
+   !!useEffect return에서는 항상 function을 리턴해 주어야 한답니다.
 
 ### `yarn start`
 

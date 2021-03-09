@@ -20,7 +20,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
 		authService.logout();
 	};
 
-	// 이 useEffect는 사용자가
+	// 데이터 보존하기 위한 state
 	useEffect(() => {
 		if (!userId) {
 			return;
@@ -30,10 +30,11 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
 			setCards(cards); // cards(새로운 데이터)를 받아오면 우리의 state를 업데이트 한다
 		});
 		// 끄고 싶을때 (컴포넌트가 업마운트 되었을때 더이상 보이지 않을때)
+		// 위에 작업이 다 수행이 완료되고 마지막으로 return 된다
 		return () => {
-			stopSync();
+			stopSync(); // 컴포넌트가 언마운트되면 수행한다
 		};
-	}, [userId]); // 이 useEffect는 maker 컴포넌트가 마운트가 되었을때 그리고 사용자의 id가 변경될때마다 쓴다
+	}, [userId, cardRepository]); // 이 useEffect는 maker 컴포넌트가 마운트가 되었을때 그리고 사용자의 userid, cardRepository가 변경될때마다 쓴다
 
 	// 사용자가 변경될때 콜백 (로그인)
 	useEffect(() => {
@@ -44,7 +45,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
 				history.push("/cardmaker-react");
 			}
 		});
-	});
+	}, [authService, userId, history]); //authService가 변경될때만 등록되도록 (dependancy)
 
 	// state가 Obejct로 처리되면서 중복되어 필요없어짐
 	// card_add_form에서가 아니고 maker에서 최종적으로 받기 때문에 여기서 만들어줘야 한다
