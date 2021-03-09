@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import ReactDOM from "react-dom";
 import "./index.module.css";
 import App from "./app";
@@ -19,9 +19,9 @@ const imageUploader = new ImageUploader();
 // 사용자가 FileInput을 사용할때 원하는 proprs를 전달해서 ImageFileInput {...props} 전달해주기 때문에 확장성이 좋다
 // imageUploader={imageUploader}는 고정이고 prop은 injection해놓는다 .
 // component prop은 대문자로 시작
-const FileInput = (props) => (
+const FileInput = memo((props) => (
 	<ImageFileInput {...props} imageUploader={imageUploader} />
-);
+));
 
 const cardRepository = new CardRepository();
 

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import styles from "./card.module.css";
 
-const Card = ({ card }) => {
+//memo : card의 object가 변화하지 않으면 업데이트될 필요가 없다
+const Card = memo(({ card }) => {
 	const DEFAULT_IMAGE = process.env.PUBLIC_URL + "/images/default_logo.png";
 	const { name, company, title, email, message, theme, fileURL } = card;
 	const url = fileURL || DEFAULT_IMAGE; //fielURL이 있으면 그대로 fileURL을 쓰고 없다면 디폴트
@@ -17,7 +18,7 @@ const Card = ({ card }) => {
 			</div>
 		</li>
 	);
-};
+});
 
 function getStyles(theme) {
 	switch (theme) {

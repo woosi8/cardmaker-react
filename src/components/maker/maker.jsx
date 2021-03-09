@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Footer from "../footer/footer";
 import Header from "../header/header";
@@ -16,9 +16,12 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
 	});
 	// 리액트 훅으로 state를 다른 변수로 따로 관리할수 있다는 장점
 	const [userId, setUserId] = useState(historyState && historyState.id); // historyState는 login 컴포넌트에서 오면 값이 있고 다른 컴포넌트에서 오면 값이 없다
-	const onLogout = () => {
+
+	// 지역변수의 콜백함수가 다른 자식 컴포넌트로 전달될때는 useCallback을 이용해 캐쉬가 되도록 계속 만들어지지 않도록 하는게 중요하다
+	// maker의 지역변수로써 maker가 업데이트 될때마다 랜더링이 된다. 함수가 계속 호출이 되어도 동일한 데이터를 쓸려고 usuCallback
+	const onLogout = useCallback(() => {
 		authService.logout();
-	};
+	}, [authService]); //dependency: useCallback으로 변경이 안되지만 다만 authService 프롭의 변화가 생기면 그떄는 다시 새로운 콜백을 만든다
 
 	// 데이터 보존하기 위한 state
 	useEffect(() => {
