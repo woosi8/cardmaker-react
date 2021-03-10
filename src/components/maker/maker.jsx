@@ -10,10 +10,9 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
 	const history = useHistory();
 	const historyState = history?.location?.state; //login 에서 history에 저장한 state에 user id를 불러온다
 
-	const [cards, setCards] = useState({
-		// key는 카드의 아이디이고 {오브젝트는} 벨류 : 오브젝트 형태로 관리해야 속도측면에서 좋다. 배열이 많아지면 업데이트시 맵핑할때 그만큼 속도가 저하된다.
-		// key는 card의 id로 한다 1: {id:"1"}
-	});
+	// key는 카드의 아이디이고 {오브젝트는} 벨류 : 오브젝트 형태로 관리해야 속도측면에서 좋다. 배열이 많아지면 업데이트시 맵핑할때 그만큼 속도가 저하된다.
+	// key는 card의 id로 한다 1: {id:"1"}
+	const [cards, setCards] = useState({});
 	// 리액트 훅으로 state를 다른 변수로 따로 관리할수 있다는 장점
 	const [userId, setUserId] = useState(historyState && historyState.id); // historyState는 login 컴포넌트에서 오면 값이 있고 다른 컴포넌트에서 오면 값이 없다
 
@@ -23,7 +22,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
 		authService.logout();
 	}, [authService]); //dependency: useCallback으로 변경이 안되지만 다만 authService 프롭의 변화가 생기면 그떄는 다시 새로운 콜백을 만든다
 
-	// 데이터 보존하기 위한 state
+	// 데이터 보존하기 위한
 	useEffect(() => {
 		if (!userId) {
 			return;
@@ -44,7 +43,9 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
 		authService.onAuthChange((user) => {
 			if (user) {
 				setUserId(user.uid);
-			} else {
+			}
+			// 로그아웃시
+			else {
 				history.push("/cardmaker-react");
 			}
 		});
@@ -60,12 +61,14 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
 	// };
 
 	const CreateOrupdateCard = (card) => {
-		//card는 card_edit_form에서 updateCard로 입력추가된 업데이트된 값을 props로 가져온다
+		//card는 card_edit_form,add에서 updateCard로 입력추가된 업데이트된 값을 props로 가져온다
 		//setCards를 이용해야 최신화가 잘된다 . setCards를 부를때의 cards의 상태,이 시점(최신)의 cards의 상태를 복사해온다
 		setCards((cards) => {
 			const updated = { ...cards };
-			updated[card.id] = card; // updated[card.id] 해당하는 이 키 아이디를 새로업데이트된 card로 변경 해준다
-			// [card.id]는 1,2,3 중에 하나이고, 만약 1이면 state가 1인 오브젝트가 선택되고 그 오브젝트를 최신화된 card로 변경해준다
+			// cards는 기존의 오브젝트고 card는 새로운 입력값을 가진
+			updated[card.id] = card; // 기존 cards에 key값에 새로만든 card.id(즉 임의의 숫자값)를 넣고 거기에 card 값들을 업데이트해준다
+			// edit에서는 card.id(edit하고 있는 인덱스)에 해당하는 정보들이 새로운 card값으로 덮어진다
+			// add에서는 애초에 card.id에 맞는 인덱스가 오브젝트에 없으니깐 새로운것이 추가가 된다
 			return updated; // maker.js의 state(cards)를 업데이트 해줘야 입력한 값들이 화면에 나오게 된다 (그전에 입력값은 그저 card에 넣어놓은거 뿐)
 		});
 
