@@ -28,13 +28,14 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
 			return;
 		}
 		const stopSync = cardRepository.syncCards(userId, (cards) => {
+			//cards cardrepository에서 value가 들어온다
 			//2번째 인자 cards는 prop으로 onUpdate를 호출한다 value = cards 우리 state에 넣어서  업데이트한다
 			setCards(cards); // cards(새로운 데이터)를 받아오면 우리의 state를 업데이트 한다
 		});
 		// 끄고 싶을때 (컴포넌트가 업마운트 되었을때 더이상 보이지 않을때)
 		// 위에 작업이 다 수행이 완료되고 마지막으로 return 된다
 		return () => {
-			stopSync(); // 컴포넌트가 언마운트되면 수행한다
+			stopSync(); // 컴포넌트가 언마운트되면 수행한다(CardRepository의 return값이 온다)
 		};
 	}, [userId, cardRepository]); // 이 useEffect는 maker 컴포넌트가 마운트가 되었을때 그리고 사용자의 userid, cardRepository가 변경될때마다 쓴다
 
@@ -83,7 +84,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
 		});
 		cardRepository.removeCard(userId, card);
 	};
-
+	console.log(cards);
 	return (
 		<section className={styles.maker}>
 			<Header onLogout={onLogout} />

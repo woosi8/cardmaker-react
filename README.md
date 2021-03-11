@@ -52,18 +52,41 @@ useEffect = stopSync, onAuthChange
 - CreateOrupdateCard
   edit_form(prop:onAdd)과 add_form(prop:updateCard)에서 업데이트 된 데이터(card)를 전달 받아 cards에 업데이트 해준다
 - deleteCard
+  해당하는 key를 delete 해준다. edit_form에서 deletcard를 prop으로 전달해서 onSubmit에 호출해준다.
 
-### Editor
+## Editor
 
-#### - CardEditForm
+### - CardEditForm
 
-#### - CardAddForm
+props (FileInput, card, updateCard, deleteCard)
 
-#### - image_file_input
+FileInput : image_file_input.jsx , upload.js> index > app > maker >Editor > card_edit_form
+onFileChange는 image_file_input.jsx에 있는 onChange의 onFileChange에서 upload한 파일의 name,url을 받아와서 카드 데이터에 넣어준다
+onChange는 form에 자식요소들의 값들이 변경될때 onChange를 불러오게 설정하고, 각각의 event의 target을 받아와서 name을 key 값으로, value를 value로 card에 넣어줘서 updateCard(maker의 CreateOrupdateCard)에 전달되서 업데이트 되게 한다
+
+### - CardAddForm
+
+props (FileInput, onAdd)
+state (file)
+file이 바뀌면(사용자가 업로드) 하면 state로 가지고 있는다. 왜냐면 변경된 값은 add버튼을 누를때만 업데이트 되기떄문
+
+### - image_file_input
+
+사용자가 실제로는 button을 클릭하지만 실제로는 input이 실행된다. onButtonClick에 input에 ref를 주어서 버튼 클릭시 input이 클릭되도록 설정한다
+Add 버튼이 클릭되면 onClick에 onSubmit이 button 컴포넌트에 전달된다.
+onSubmit 함수에 card 데이터들이 들어있는 오브젝트를 만든다.
+또한, onAdd에 인자 card를 prop으로 전달한다.
+editor > maker(addCard) >CreateOrupdateCard에 card로 전달된다
 
 ### - Preview
 
-#### - Card
+prop cards를 maker/cards에서 전달받는다
+API Object.keys를 이용해 cards를 맵핑하나 Card에 prop으로 전달한다
+
+### - Card
+
+Preview에서 cards[key](cards중 하나의 인덱스 해당오브젝트) prop을 card로 전달받는다.
+리턴 name,company...요스들에 받아온 card 데이터들을 넣어준다
 
 ##### Firebase 실시간 Database Sync
 
@@ -74,16 +97,30 @@ useEffect = stopSync, onAuthChange
 
 - maker.jsx ( // 데이터 보존하기 위한 state)
 
-1. 컴포넌트가 마운트가 되면 cardRepository의 syncCards가 먼저 호출이 됩니다
-
-2. syncCards의 함수가 수행됩니다 (ref.on이 실행되겠죠?)
-   그리고 함수 수행이 완료되고 마지막으로는 arrow 함수가 리턴이 되어요 (아직 수행되지 않음)
-
-3. 리턴된 arrow 함수의 오브젝트가 stopSync에 할당이 되어지고
-
-4. 여기 useEffect에서 리턴되는 stopSync를 수행하게될 arrow 함수는 나중에 컴포넌트가 언마운트되면 수행이 될거예요 :) (그전까지는 stopSync()는 호출되지 않음, 그러므로 startSync에서 리턴되었던 함수도 수행이 되지 않음)
-   !!useEffect return에서는 항상 function을 리턴해 주어야 한답니다.
-
 # 📁 Service
 
 ## auth_service
+
+사용자가 로그인하거나 로그아웃,사용자가 바꼈을때 원하는 기능을 수행하는 기능들을 담당하는 클래스
+
+## card_repository
+
+firebase에서 해당 경로의 데이터가 계속 업데이트 될때마다 서버에 동기화하고, firebase에 save or remove 해주는 기능을 담당하는 클래스
+
+1. maker컴포넌트가 마운트가 되면 첫번째 useEffect에서 cardRepository의 syncCards가 먼저 호출이 됩니다
+2. syncCards의 함수가 수행됩니다 (ref.on이 실행되겠죠?)
+   그리고 함수 수행이 완료되고 마지막으로는 arrow 함수가 리턴이 된다 (아직 수행되지 않음)
+
+3. 리턴된 arrow 함수의 오브젝트가 stopSync에 할당이 되어지고
+
+4. 여기 useEffect에서 리턴되는 stopSync를 수행하게될 arrow 함수는 나중에 컴포넌트가 언마운트되면 수행이 된다. (그전까지는 stopSync()는 호출되지 않음)
+   !!useEffect return에서는 항상 function을 리턴해 주어야 함
+
+## firebase
+
+firebase에서 받아온 apiKey,databaseURL등을 설정해놓고 env에 저장하여 gitignore로 숨김 처리한다.
+firebase를 전부가져오지 않고 필요한 인터페이스를 정리한다.
+
+## image_uploader
+
+이미지를 업로드해주는 클래스 (파이어베이스)

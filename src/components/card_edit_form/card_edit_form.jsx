@@ -6,7 +6,9 @@ const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
 	const { name, company, title, email, message, theme, fileName } = card; //props으로 maker에 있는 cards 오브젝트를 가져와서 맞는 키값에 할당
 
 	const onFileChange = (file) => {
+		//file은 image_file_input.jsx에서온 name,url 데이터
 		updateCard({
+			// = CreateOrupdateCard
 			...card,
 			fileName: file.name,
 			fileURL: file.url,
@@ -17,7 +19,7 @@ const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
 			return;
 		}
 		event.preventDefault();
-		// 순서는: 1. 기존의 card값을 복사하고 + 업데이트 되는 내용을 추가 해서 새로운 오브젝트를 먼저 만들고 2. 그리고 updateCard에 인자로 전달해줘요
+		// 순서는: 1. 기존의 card값을 복사하고 + 업데이트 되는 내용을 추가(or 덮어써서) 해서 새로운 오브젝트를 먼저 만들고 2. 그리고 updateCard에 인자로 전달해줘요
 		updateCard({
 			...card, //기존 카드의 키와 벨류는 그대로 쓰면서
 			// 클릭한 input의 name이 card의 key가 되고, value가 우리의 value가 된다

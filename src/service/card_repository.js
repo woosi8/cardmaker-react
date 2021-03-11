@@ -10,8 +10,8 @@ class CardRepository {
 		// snapshot val안에 해당하는 데이터가 들어있다
 		ref.on("value", (snapshot) => {
 			//sanpshot :
-			const value = snapshot.val();
-			value && onUpdate(value); //value가 있다면 onUpdate함수를 호출한다
+			const value = snapshot.val(); //ref경로에 데이터가 업데이트된다면 snaphot.val를
+			value && onUpdate(value); // 즉 데이터 베이스가 업데이트 될때마다 value와 함께 maker에 syncCard에 두번째 인자(cards) 콜백함수에 전달
 		});
 		return () => ref.off(); //stopSync
 	}
