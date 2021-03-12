@@ -13,6 +13,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
 	// key는 카드의 아이디이고 {오브젝트는} 벨류 : 오브젝트 형태로 관리해야 속도측면에서 좋다. 배열이 많아지면 업데이트시 맵핑할때 그만큼 속도가 저하된다.
 	// key는 card의 id로 한다 1: {id:"1"}
 	const [cards, setCards] = useState({});
+	console.log(cards);
 	// 리액트 훅으로 state를 다른 변수로 따로 관리할수 있다는 장점
 	const [userId, setUserId] = useState(historyState && historyState.id); // historyState는 login 컴포넌트에서 오면 값이 있고 다른 컴포넌트에서 오면 값이 없다
 
@@ -84,7 +85,6 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
 		});
 		cardRepository.removeCard(userId, card);
 	};
-	console.log(cards);
 	return (
 		<section className={styles.maker}>
 			<Header onLogout={onLogout} />
