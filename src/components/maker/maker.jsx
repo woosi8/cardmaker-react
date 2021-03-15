@@ -10,8 +10,6 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
 	const history = useHistory();
 	const historyState = history?.location?.state; //login 에서 history에 저장한 state에 user id를 불러온다
 
-	// key는 카드의 아이디이고 {오브젝트는} 벨류 : 오브젝트 형태로 관리해야 속도측면에서 좋다. 배열이 많아지면 업데이트시 맵핑할때 그만큼 속도가 저하된다.
-	// key는 card의 id로 한다 1: {id:"1"}
 	const [cards, setCards] = useState({});
 	console.log(cards);
 	// 리액트 훅으로 state를 다른 변수로 따로 관리할수 있다는 장점
@@ -21,7 +19,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
 	// maker의 지역변수로써 maker가 업데이트 될때마다 랜더링이 된다. 함수가 계속 호출이 되어도 동일한 데이터를 쓸려고 usuCallback
 	const onLogout = useCallback(() => {
 		authService.logout();
-	}, [authService]); //dependency: useCallback으로 변경이 안되지만 다만 authService 프롭의 변화가 생기면 그떄는 다시 새로운 콜백을 만든다
+	}, [authService]); // useCallback으로 변경이 안되지만 다만 authService 프롭의 변화가 생기면 그떄는 다시 새로운 콜백을 만든다
 
 	// 데이터 보존하기 위한
 	useEffect(() => {
@@ -52,15 +50,6 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
 			}
 		});
 	}, [authService, userId, history]); //authService가 변경될때만 등록되도록 (dependancy)
-
-	// state가 Obejct로 처리되면서 중복되어 필요없어짐
-	// card_add_form에서가 아니고 maker에서 최종적으로 받기 때문에 여기서 만들어줘야 한다
-	// const addCard = (card) => {
-	// 	// ...cards 기존에 있는 cards를 그대로 복사해오고  추가하는 하나만(card) 더해준다
-	// 	const updated = [...cards, card];
-	// 	// state API (setCards)로 updated되는거 저장
-	// 	setCards(updated);
-	// };
 
 	const CreateOrupdateCard = (card) => {
 		//card는 card_edit_form,add에서 updateCard로 입력추가된 업데이트된 값을 props로 가져온다
